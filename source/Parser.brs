@@ -42,6 +42,9 @@ function _Parser__ParsePlaylistVideos(json)
             id : videoItem.id
             title : videoItem.title
             description : videoItem.description
+            Rating : 5+RND(5)
+            categories : ["animals", "planets", "interesting"]
+            actors : ["Clint Eastwood", "Eli Wallach", "Lee Van Cleef"]
             HDPosterUrl : videoItem.poster_url
             HandlerConfigVideo : {
                 name : "VideoContentHandler"

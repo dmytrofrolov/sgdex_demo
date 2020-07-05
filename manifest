@@ -1,7 +1,13 @@
 title=SGDEX Sample
 
 major_version=1
-minor_version=1
+minor_version=0
 build_version=1
+
+splash_screen_sd=pkg:/images/splash_screen_sd.png
+splash_screen_hd=pkg:/images/splash_screen_hd.png
+splash_screen_fhd=pkg:/images/splash_screen_fullhd.png
+mm_icon_focus_sd=pkg:/images/mm_icon_focus_sd.png
+mm_icon_focus_hd=pkg:/images/mm_icon_focus_hd.png
 
 bs_libs_required=roku_ads_lib

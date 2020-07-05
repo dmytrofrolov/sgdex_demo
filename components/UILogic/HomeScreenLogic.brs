@@ -1,3 +1,4 @@
+' HomeScreenLogic.brs
 
 sub ShowHomeScreen()
     homeGrid = CreateObject("roSGNode", "GridView")
@@ -27,6 +28,8 @@ sub OnHomeGridItemSelected(event as Object)
 end sub
 
 
+' When user is returned back from DetailsScreen, it's a good UX to move focus
+' to exact item user is returned from
 sub OnDetailsScreenWasClosed(event as Object)
     detailsScreen = event.GetRoSGNode()
     m.homeGrid.jumpToRowItem = [m.homeGrid.rowItemSelected[0], detailsScreen.itemFocused]

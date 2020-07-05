@@ -17,6 +17,11 @@ function Api() as Object
 end function
 
 
+' ################################################
+' #################### PUBLIC ####################
+' ################################################
+
+
 function _API__GetPlaylists()
     url = m._BASE_URL + "/playlist.php"
     apiResult = m._makeApiCall(url)
@@ -82,9 +87,9 @@ end function
 
 
 
-
-
-
+' #################################################
+' #################### PRIVATE ####################
+' #################################################
 
 function _API__makeApiCall(url as String, parameters = {}, headers = {}, body = "" as String, requestType = "GET" as String, cookies = {} as Object, timeout = 20 as Integer) as Object
     ? "[_API__makeApiCall] url == ["; requestType; "] "; url
@@ -147,4 +152,3 @@ function _API__makeApiCall(url as String, parameters = {}, headers = {}, body = 
                 errorMsg    : "Request timeout"
             }
 end function
-

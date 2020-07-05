@@ -1,6 +1,22 @@
-' Copyright (c) 2018 Roku, Inc. All rights reserved.
+' SGDEX.brs
 
 sub RunUserInterface(args)
+    if args.RunTests = "true" and type(TestRunner) = "Function" then
+        Runner = TestRunner()
+
+        Runner.SetFunctions([
+            TestSuite__API_Main
+        ])
+
+        Runner.Logger.SetVerbosity(3)
+        Runner.Logger.SetEcho(false)
+        Runner.Logger.SetJUnit(false)
+        Runner.SetFailFast(true)
+        
+        Runner.Run()
+        return
+    end if
+
     m.args = args
     if Type(GetSceneName) <> "<uninitialized>" AND GetSceneName <> invalid AND GetInterface(GetSceneName, "ifFunction") <> invalid then
         StartSGDEXChannel(GetSceneName(), args)
