@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="PlaylistsContentHandler" extends="ContentHandler">
+    <script type="text/brightscript" uri="PlaylistsContentHandler.brs" />
+
+    <script type="text/brightscript" uri="pkg:/source/Api.brs" />
+    <script type="text/brightscript" uri="pkg:/source/Parser.brs" />
+
+    <script type="text/brightscript" uri="pkg:/components/SGDEX/Views/utils/Utils.brs" />
+</component>
