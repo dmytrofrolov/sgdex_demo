@@ -31,6 +31,10 @@ As soon as major functionality was implemented in 2 hours out of 4, more nice fe
 - API communication module code is covered with Unit tests;
 - App was prepared for publishing, packaged and deployed to Roku ChannelStore as Private channel;
 
+**Version 1.1**
+- Implemented possibility to add/remove items to My Playlist
+- Added background video playback
+
 ## Publishing
 The app was packaged and deployed to Roku ChannelStore it's available to download via
 https://my.roku.com/account/add/6X265H2
