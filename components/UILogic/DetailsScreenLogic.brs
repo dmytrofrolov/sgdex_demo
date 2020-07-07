@@ -29,26 +29,43 @@ sub ReloadButtons(detailsScreen)
     focusedItem = detailsScreen.content.GetChild(detailsScreen.itemFocused)
     if focusedItem = invalid then return
 
-    videoId = focusedItem.id
-    playStart = GetBookmark(videoId)
-    if playStart < 3
-        focusedItem.playStart = playStart
+    buttonsList = []
+
+    if focusedItem.id = "add_to_my_playlist"
         buttonsList = [{
-                id: "play"
-                title: "Play"
+                id: "add_to_my_playlist"
+                title: "This is not playable item"
             }]
     else
-        buttonsList = [{
-                id: "continue"
-                title: "Continue watching"
-            },
-            {
-                id: "play_from_beginning"
-                title: "Play from the beginning"
-            }]
+        videoId = focusedItem.id
+        playStart = GetBookmark(videoId)
+        if playStart < 3
+            focusedItem.playStart = playStart
+            buttonsList = [{
+                    id: "play"
+                    title: "Play"
+                }]
+        else
+            buttonsList = [{
+                    id: "continue"
+                    title: "Continue watching"
+                },
+                {
+                    id: "play_from_beginning"
+                    title: "Play from the beginning"
+                }]
+        end if
+
+        if focusedItem.isInMyPlaylist <> invalid and focusedItem.isInMyPlaylist
+            buttonsList.push({
+                id : "remove_from_my_playlist"
+                title : "Remove from My Playlist"
+            })
+        end if
     end if
+
     detailsScreen.buttons = Utils_ContentList2Node(buttonsList)
-    
+
     ' It's good UX if focused button didn't change in case is number of buttons
     ' changed or so
     if m.previousFocusedButtonId <> invalid
@@ -77,14 +94,17 @@ sub OnDetailsButtonSelected(event as Object)
     if selectedButtonNode <> invalid
         buttonId = selectedButtonNode.id
         m.previousFocusedButtonId = buttonId
+        focusedItem = detailsScreen.content.GetChild(focusedIndex)
         if buttonId = "play_from_beginning"
-            focusedItem = detailsScreen.content.GetChild(focusedIndex)
             focusedItem.playStart = 0
             DeleteBookmark(focusedItem.id)
         end if
         if buttonId = "play_from_beginning" or buttonId = "continue" or buttonId = "play"
-            videoScreen = ShowVideoScreen(detailsScreen.content, focusedIndex)
-            videoScreen.ObserveField("wasClosed", "OnVideoScreenWasClosed")
+            PlayVideo(detailsScreen.content, focusedIndex)
+        else if buttonId = "remove_from_my_playlist"
+            m.global.myPlaylistNode.RemoveChild(focusedItem)
+            m.previousFocusedButtonId = invalid
+            detailsScreen.close = true
         end if
     end if
 end sub
@@ -95,18 +115,4 @@ end sub
 sub OnDetailsItemFocused(event as Object)
     detailsScreen = event.GetRoSGNode()
     ReloadButtons(detailsScreen)
-end sub
-
-
-' When video is ended by itself and screen is closed then it was last item in playlist
-' and need to restart video playback. If screen was closed by user need to move
-' focus to correct item in playlist.
-sub OnVideoScreenWasClosed(event as Object)
-    videoScreen = event.GetRoSGNode()
-    if videoScreen.state = "finished"
-        videoScreen = ShowVideoScreen(m.detailsScreen.content, 0)
-        videoScreen.ObserveField("wasClosed", "OnVideoScreenWasClosed")
-    else
-        m.detailsScreen.jumpToItem = videoScreen.currentIndex
-    end if
 end sub

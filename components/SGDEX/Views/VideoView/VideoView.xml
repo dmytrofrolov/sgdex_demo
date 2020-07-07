@@ -42,6 +42,8 @@
         <!-- Config to know should Video View show endcards with default next item and Repeat button
         even if there is no content getter specified by developer  -->
         <field id="alwaysShowEndcards" type="bool" value="false" />
+        
+        <field id="moveFocusToVideoNode" type="bool" alwaysNotify="true" />
 
         <!-- @Public -->
         <!-- To make library know is it playlist or individual item  -->

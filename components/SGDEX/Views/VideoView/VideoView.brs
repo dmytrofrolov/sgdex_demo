@@ -85,6 +85,12 @@ sub Init()
     ' Internal flag to signalize possibility to play content after EndcardView closes
     ' and next content is preloaded in background
     m.shouldStartPlaybackAfterHiddenLoading = false
+
+    m.top.ObserveField("moveFocusToVideoNode", "onMoveFocusToVideoNode")
+end sub
+
+sub onMoveFocusToVideoNode()
+    m.video.SetFocus(true)
 end sub
 
 
@@ -135,7 +141,10 @@ Sub ClearVideoNode()
         ' Added toStr() to m.top.content to pass by value, not roString reference, so next lines are no longer need
         ' ' this should be done because for some reason video node is not released for some time and new one can't be created
         ' ' m.top.control = "none" ' workaround to release Video View interface field
-
+        if m.video.HasFocus() then
+            m.video.SetFocus(false)
+            m.top.SetFocus(true)
+        end if
         m.top.removeChild(m.video)
         m.video = Invalid
     end if

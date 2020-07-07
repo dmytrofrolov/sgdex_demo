@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="AddToMyListScreen" extends="CustomView">
+    <interface>
+        <field id="selectedItem" type="node" />
+    </interface>
+
+    <script type="text/brightscript" uri="AddToMyListScreen.brs" />
+    
+    <script type="text/brightscript" uri="pkg:/components/SGDEX/Views/utils/Utils.brs" />
+
+    <children>
+        <Label
+            text="Select item to add to My Playlist"
+            translation="[130, 150]"
+            />
+        <LabelList
+            id="list"
+            translation="[130, 200]"
+            />
+
+        <LayoutGroup
+            id = "viewLayout"
+            translation="[630, 200]"
+            itemSpacings="[15]"
+            layoutDirection="vert"
+            >
+            <Rectangle
+                id="styledPosterArea"
+                height="201"
+                color="0xFFFFFF00">
+                <StyledPoster
+                    id="poster"
+                    maxWidth="357"
+                    maxHeight="201"
+                />
+            </Rectangle>
+
+            <Label
+                id="title"
+                width="357"
+                wrap="false"
+                />
+            <Label
+                id="description"
+                wrap="true"
+                maxLines="5"
+                width="593"
+                />
+
+            <Label
+                id="actors"
+                wrap="false"
+                width="520"
+                />
+        </LayoutGroup>
+
+    </children>
+</component>

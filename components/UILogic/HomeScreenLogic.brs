@@ -23,8 +23,15 @@ sub OnHomeGridItemSelected(event as Object)
     homeGrid = event.GetRoSGNode()
     rowItemSelected = event.GetData()
     selectedRow = homeGrid.content.GetChild(rowItemSelected[0])
-    detailsScreen = ShowDetailsScreen(selectedRow, rowItemSelected[1])
-    detailsScreen.ObserveField("wasClosed", "OnDetailsScreenWasClosed")
+    selectedItem = selectedRow.GetChild(rowItemSelected[1])
+    if selectedItem <> invalid
+        if selectedItem.id = "add_to_my_playlist"
+            OpenAddToMyPlaylistScreen(homeGrid.content)
+        else
+            detailsScreen = ShowDetailsScreen(selectedRow, rowItemSelected[1])
+            detailsScreen.ObserveField("wasClosed", "OnDetailsScreenWasClosed")
+        end if
+    end if
 end sub
 
 

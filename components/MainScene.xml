@@ -6,6 +6,7 @@
     <script type="text/brightscript" uri="UILogic/HomeScreenLogic.brs" />
     <script type="text/brightscript" uri="UILogic/DetailsScreenLogic.brs" />
     <script type="text/brightscript" uri="UILogic/VideoScreenLogic.brs" />
+    <script type="text/brightscript" uri="UILogic/AddToMyPlaylistScreenLogic.brs" />
     
     <script type="text/brightscript" uri="SGDEX/Views/utils/Utils.brs" />
     <script type="text/brightscript" uri="pkg:/source/BookmarksUtils.brs" />
